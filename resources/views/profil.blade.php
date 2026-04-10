@@ -226,7 +226,7 @@
                 <a href="/profil" class="nav-link active">Profil</a>
                 <a href="/katalog" class="nav-link">Katalog</a>
                 <a href="/bantuan" class="nav-link">Bantuan</a>
-                <a href="/kontak" class="nav-link">Kontak</a>
+                <a href="/" class="nav-link">Kontak</a>
             </nav>
             <div style="display:flex;align-items:center;gap:10px;">
                 <div class="avatar-sm">MH</div>
