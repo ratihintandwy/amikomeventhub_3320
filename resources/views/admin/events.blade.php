@@ -1,66 +1,83 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Events')
-@section('page-title', 'Manajemen Events')
-@section('page-subtitle', 'Kelola semua event yang terdaftar di platform')
-
 @section('content')
-
-<div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-
-    <div class="p-5 border-b border-gray-100 flex items-center justify-between">
-        <h3 class="font-bold text-gray-800">Daftar Event</h3>
-        <button class="bg-purple-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-purple-700 transition">
-            + Tambah Event
-        </button>
+<header class="flex justify-between items-center mb-10">
+    <div>
+        <h1 class="text-3xl font-black">Manajemen Event</h1>
+        <p class="text-slate-500 font-medium">Kelola semua event di platform Anda</p>
     </div>
+    <button onclick="openAddModal()"
+        class="px-8 py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition">
+        + Tambah Event
+    </button>
+</header>
 
+<!-- Events Table -->
+<div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
     <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wide">
-                <tr>
-                    <th class="text-left px-5 py-3">No</th>
-                    <th class="text-left px-5 py-3">Judul Event</th>
-                    <th class="text-left px-5 py-3">Kategori</th>
-                    <th class="text-left px-5 py-3">Tanggal</th>
-                    <th class="text-left px-5 py-3">Harga</th>
-                    <th class="text-left px-5 py-3">Kursi</th>
-                    <th class="text-left px-5 py-3">Status</th>
-                    <th class="text-left px-5 py-3">Aksi</th>
+        <table class="w-full">
+            <thead>
+                <tr class="border-b border-slate-100 bg-slate-50">
+                    <th class="px-6 py-4 text-left text-sm font-bold text-slate-600 uppercase tracking-wider">No.</th>
+                    <th class="px-6 py-4 text-left text-sm font-bold text-slate-600 uppercase tracking-wider">Nama Event</th>
+                    <th class="px-6 py-4 text-left text-sm font-bold text-slate-600 uppercase tracking-wider">Kategori</th>
+                    <th class="px-6 py-4 text-left text-sm font-bold text-slate-600 uppercase tracking-wider">Tanggal</th>
+                    <th class="px-6 py-4 text-left text-sm font-bold text-slate-600 uppercase tracking-wider">Harga</th>
+                    <th class="px-6 py-4 text-left text-sm font-bold text-slate-600 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-4 text-center text-sm font-bold text-slate-600 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-50">
-                @foreach($events as $i => $event)
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-5 py-3.5 text-gray-400">{{ $i + 1 }}</td>
-                    <td class="px-5 py-3.5 font-medium text-gray-800 max-w-xs">{{ $event['title'] }}</td>
-                    <td class="px-5 py-3.5">
-                        <span class="bg-purple-100 text-purple-700 text-xs font-semibold px-2 py-0.5 rounded-full">
-                            {{ $event['category'] }}
-                        </span>
-                    </td>
-                    <td class="px-5 py-3.5 text-gray-600">{{ $event['date'] }}</td>
-                    <td class="px-5 py-3.5 font-semibold text-gray-700">{{ $event['price'] }}</td>
-                    <td class="px-5 py-3.5 text-gray-600">{{ $event['seats'] }}</td>
-                    <td class="px-5 py-3.5">
-                        @if($event['status'] === 'Aktif')
-                        <span class="bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-1 rounded-full">Aktif</span>
-                        @else
-                        <span class="bg-gray-100 text-gray-600 text-xs font-semibold px-2.5 py-1 rounded-full">Draft</span>
-                        @endif
-                    </td>
-                    <td class="px-5 py-3.5">
-                        <div class="flex gap-2">
-                            <button class="text-blue-500 hover:text-blue-700 text-xs font-medium">Edit</button>
-                            <button class="text-red-500 hover:text-red-700 text-xs font-medium">Hapus</button>
+            <tbody class="divide-y divide-slate-100">
+                <!-- Sample Event 1 -->
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="px-6 py-4 text-slate-900 font-medium">1</td>
+                    <td class="px-6 py-4 font-bold">Jazz Night 2024</td>
+                    <td class="px-6 py-4"><span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-sm font-bold">Konser</span></td>
+                    <td class="px-6 py-4 text-slate-600">16 Nov 2024</td>
+                    <td class="px-6 py-4 font-bold text-indigo-600">Rp 150.000</td>
+                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-bold">Aktif</span></td>
+                    <td class="px-6 py-4">
+                        <div class="flex gap-2 justify-center">
+                            <button class="px-4 py-2 bg-blue-50 text-blue-600 rounded-xl font-bold text-sm hover:bg-blue-100 transition">Edit</button>
+                            <button class="px-4 py-2 bg-red-50 text-red-600 rounded-xl font-bold text-sm hover:bg-red-100 transition">Hapus</button>
                         </div>
                     </td>
                 </tr>
-                @endforeach
+
+                <!-- Sample Event 2 -->
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="px-6 py-4 text-slate-900 font-medium">2</td>
+                    <td class="px-6 py-4 font-bold">AI & Future Workshop</td>
+                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-bold">Workshop</span></td>
+                    <td class="px-6 py-4 text-slate-600">26 Oct 2024</td>
+                    <td class="px-6 py-4 font-bold text-indigo-600">Rp 50.000</td>
+                    <td class="px-6 py-4"><span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-bold">Aktif</span></td>
+                    <td class="px-6 py-4">
+                        <div class="flex gap-2 justify-center">
+                            <button class="px-4 py-2 bg-blue-50 text-blue-600 rounded-xl font-bold text-sm hover:bg-blue-100 transition">Edit</button>
+                            <button class="px-4 py-2 bg-red-50 text-red-600 rounded-xl font-bold text-sm hover:bg-red-100 transition">Hapus</button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Sample Event 3 -->
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="px-6 py-4 text-slate-900 font-medium">3</td>
+                    <td class="px-6 py-4 font-bold">Hackathon 2024</td>
+                    <td class="px-6 py-4"><span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-sm font-bold">Seminar</span></td>
+                    <td class="px-6 py-4 text-slate-600">18-20 Oct 2024</td>
+                    <td class="px-6 py-4 font-bold text-green-600">Gratis</td>
+                    <td class="px-6 py-4"><span class="px-3 py-1 bg-yellow-50 text-yellow-700 rounded-full text-sm font-bold">Mendatang</span></td>
+                    <td class="px-6 py-4">
+                        <div class="flex gap-2 justify-center">
+                            <button class="px-4 py-2 bg-blue-50 text-blue-600 rounded-xl font-bold text-sm hover:bg-blue-100 transition">Edit</button>
+                            <button class="px-4 py-2 bg-red-50 text-red-600 rounded-xl font-bold text-sm hover:bg-red-100 transition">Hapus</button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
-
 </div>
 
 @endsection

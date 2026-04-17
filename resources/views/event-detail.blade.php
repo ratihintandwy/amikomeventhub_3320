@@ -1,102 +1,122 @@
 @extends('layouts.app')
-
-@section('title', $event['title'] . ' — Amikom Event Hub')
-
 @section('content')
-
-<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-    <!-- Breadcrumb -->
-    <nav class="text-sm text-gray-500 mb-6">
-        <a href="{{ route('home') }}" class="hover:text-purple-600">Home</a>
-        <span class="mx-2">/</span>
-        <span class="text-gray-700 font-medium">{{ $event['title'] }}</span>
-    </nav>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-        <!-- LEFT: Detail Event -->
-        <div class="lg:col-span-2">
-            <img src="{{ $event['image'] }}" alt="{{ $event['title'] }}"
-                class="w-full h-72 object-cover rounded-2xl mb-6 shadow-md">
-
-            <span class="inline-block bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full mb-3">
-                {{ $event['category'] }}
-            </span>
-
-            <h1 class="text-3xl font-black text-gray-800 mb-4 leading-tight">
-                {{ $event['title'] }}
-            </h1>
-
-            <!-- Info Grid -->
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-purple-50 rounded-xl p-4">
-                    <p class="text-xs text-gray-500 mb-1">Tanggal</p>
-                    <p class="text-sm font-semibold text-gray-700">{{ $event['date'] }}</p>
-                </div>
-                <div class="bg-purple-50 rounded-xl p-4">
-                    <p class="text-xs text-gray-500 mb-1">Waktu</p>
-                    <p class="text-sm font-semibold text-gray-700">{{ $event['time'] }}</p>
-                </div>
-                <div class="bg-purple-50 rounded-xl p-4">
-                    <p class="text-xs text-gray-500 mb-1">Lokasi</p>
-                    <p class="text-sm font-semibold text-gray-700">{{ $event['location'] }}</p>
-                </div>
-                <div class="bg-purple-50 rounded-xl p-4">
-                    <p class="text-xs text-gray-500 mb-1">Pembicara</p>
-                    <p class="text-sm font-semibold text-gray-700">{{ $event['speaker'] }}</p>
-                </div>
-            </div>
-
-            <h2 class="text-lg font-bold text-gray-800 mb-2">Deskripsi Event</h2>
-            <p class="text-gray-600 leading-relaxed">{{ $event['description'] }}</p>
-
-            <div class="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-xl">
-                <p class="text-sm text-yellow-800">
-                    <strong>Penyelenggara:</strong> {{ $event['organizer'] }}
-                </p>
-            </div>
-        </div>
-
-        <!-- RIGHT: Pembelian Tiket -->
-        <div class="lg:col-span-1">
-            <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 sticky top-24">
-
-                <h3 class="font-bold text-gray-800 text-lg mb-4">Pesan Tiket</h3>
-
-                <!-- Price -->
-                <div class="bg-purple-50 rounded-xl p-4 mb-4 text-center">
-                    <p class="text-xs text-gray-500 mb-1">Harga Per Tiket</p>
-                    <p class="text-3xl font-black text-purple-700">{{ $event['price'] }}</p>
-                </div>
-
-                <!-- Seat Info -->
-                <div class="mb-4">
-                    <div class="flex justify-between text-sm mb-1">
-                        <span class="text-gray-500">Kursi Tersisa</span>
-                        <span class="font-semibold text-gray-700">{{ $event['seats_left'] }} / {{ $event['seats'] }}</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-purple-600 h-2 rounded-full"
-                            style="width: {{ ($event['seats_left'] / $event['seats']) * 100 }}%"></div>
+<main class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <!-- Left: Poster -->
+    <div class="lg:col-span-1">
+        <div class="sticky top-32">
+            <img src="{{ asset('assets/concert.png') }}" alt="Concert Poster"
+                class="w-full rounded-[2.5rem] shadow-2xl border-8 border-white">
+            <div class="mt-8 p-6 bg-white rounded-3xl border border-slate-100 shadow-sm">
+                <h4 class="font-bold mb-4">Penyelenggara</h4>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 font-bold">
+                        AB</div>
+                    <div>
+                        <p class="font-bold text-slate-800">ABP Productions</p>
+                        <p class="text-xs text-slate-500">Verified Organizer</p>
                     </div>
                 </div>
-
-                <!-- CTA Button -->
-                <a href="{{ route('checkout') }}"
-                    class="block w-full text-center bg-purple-600 text-white font-bold py-3 rounded-xl hover:bg-purple-700 transition duration-200 shadow-md">
-                    Daftar Sekarang
-                </a>
-
-                <a href="{{ route('home') }}"
-                    class="block w-full text-center mt-3 text-gray-500 text-sm hover:text-gray-700 transition">
-                    ← Kembali ke Daftar Event
-                </a>
-
             </div>
         </div>
-
     </div>
-</div>
 
+    <!-- Right: Details -->
+    <div class="lg:col-span-2 space-y-12">
+        <div class="space-y-4">
+            <span
+                class="px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-bold uppercase tracking-wider">Music
+                Festival</span>
+            <h1 class="text-4xl md:text-5xl font-black leading-tight">Jazz Night 2024: A Celebration of Rhythm &
+                Melody</h1>
+            <div class="flex flex-wrap gap-6 text-slate-500 font-medium">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    <span>Saturday, 16 Nov 2024</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                        </path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    <span>The Blue Note Lounge, Metropolis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="prose prose-slate max-w-none">
+            <h3 class="text-2xl font-bold mb-4">Deskripsi Event</h3>
+            <p class="text-lg text-slate-600 leading-relaxed">
+                Nikmati malam yang tak terlupakan dengan alunan jazz dari musisi internasional. Jazz Night 2024
+                hadir untuk membawa Anda ke dalam perjalanan melodi yang menenangkan dan ritme yang menggugah jiwa.
+            </p>
+            <p class="text-lg text-slate-600 leading-relaxed mt-4">
+                Tahun ini kami menghadirkan <strong>The Jazz Collective</strong>, <strong>Luna Vance</strong>, dan
+                artis favorit lainnya. Acara ini juga dilengkapi dengan food stall premium dan area networking yang
+                nyaman.
+            </p>
+        </div>
+
+        <div
+            class="bg-indigo-600 rounded-[2.5rem] p-8 md:p-12 text-white shadow-2xl shadow-indigo-200 relative overflow-hidden">
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div>
+                    <p class="text-indigo-200 font-bold uppercase tracking-widest text-sm mb-2">Harga Tiket</p>
+                    <h2 class="text-5xl font-black">Rp 150.000 <span class="text-lg font-medium text-indigo-200">/
+                            orang</span></h2>
+                    <p class="mt-4 text-indigo-100 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Sisa stok: <span class="font-bold underline">42 Tiket lagi!</span>
+                    </p>
+                </div>
+                <div>
+                    <a href="{{ route('checkout') }}"
+                        class="inline-block px-10 py-5 bg-white text-indigo-600 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
+                        Pesan Sekarang
+                    </a>
+                </div>
+            </div>
+            <!-- Decoration -->
+            <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-white opacity-10 rounded-full"></div>
+            <div class="absolute -left-10 -top-10 w-32 h-32 bg-indigo-400 opacity-20 rounded-full"></div>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="text-xl font-bold">Kebijakan Tiket</h3>
+            <ul class="space-y-3 text-slate-500">
+                <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                        </path>
+                    </svg>
+                    E-Ticket akan dikirimkan otomatis setelah pembayaran berhasil.
+                </li>
+                <li class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-green-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                        </path>
+                    </svg>
+                    Tiket dapat discan di pintu masuk (Check-in).
+                </li>
+                <li class="flex items-start gap-2 text-rose-500">
+                    <svg class="w-5 h-5 text-rose-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Tiket yang sudah dibeli tidak dapat direfund.
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
 @endsection
