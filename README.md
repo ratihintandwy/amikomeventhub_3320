@@ -7,6 +7,9 @@ Identitas Mahasiswa:
 * NIM: 24.12.3320
 * Jurusan: Sistem Informasi (SI04)
 
+---
+# Hasil Pengerjaan (Live Demo)
+
 TUGAS 2
 * Halaman Dashboard : [https://amikomeventhub-3320-main-se5rrk.free.laravel.cloud/](https://amikomeventhub-3320-main-se5rrk.free.laravel.cloud/admin/)
 * Halaman Event : [https://amikomeventhub-3320-main-se5rrk.free.laravel.cloud/#events/)
