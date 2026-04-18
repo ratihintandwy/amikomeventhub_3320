@@ -1,4 +1,4 @@
-# amikomeventhub_3320 - Yoga Adiyatma (3320) 
+# DIGITAL BUSINESS 
 [https://amikomeventhub-3320-main-se5rrk.free.laravel.cloud/](https://amikomeventhub-3320-main-se5rrk.free.laravel.cloud/)
 
 TUGAS 2
